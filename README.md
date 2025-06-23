@@ -137,3 +137,110 @@ Feel free to fork this project and submit pull requests to improve functionality
 For inquiries or collaboration, please reach out via [LinkedIn](#) or [email](#).
 
 ---
+
+🗃️ Database Design
+This section outlines the core database entities and how they relate to each other.
+
+👤 Users
+Represents people using the platform (guests or hosts).
+
+id (Primary Key)
+
+name
+
+email (unique)
+
+password_hash
+
+is_host (boolean: determines if user can list properties)
+
+🧩 Relationships:
+
+A user can create multiple properties.
+
+A user can make multiple bookings.
+
+A user can write multiple reviews.
+
+🏠 Properties
+Represents properties listed by hosts for booking.
+
+id (Primary Key)
+
+title
+
+description
+
+location
+
+price_per_night
+
+host_id (Foreign Key → Users)
+
+🧩 Relationships:
+
+A property is owned by a user (host).
+
+A property can have many bookings.
+
+A property can have many reviews.
+
+📅 Bookings
+Represents a reservation made by a guest for a property.
+
+id (Primary Key)
+
+property_id (Foreign Key → Properties)
+
+user_id (Foreign Key → Users)
+
+check_in_date
+
+check_out_date
+
+status (pending, confirmed, cancelled)
+
+🧩 Relationships:
+
+A booking belongs to a user (guest).
+
+A booking belongs to a property.
+
+A booking can have one payment.
+
+💳 Payments
+Represents a payment transaction related to a booking.
+
+id (Primary Key)
+
+booking_id (Foreign Key → Bookings)
+
+amount
+
+payment_method
+
+payment_status (e.g., success, failed)
+
+🧩 Relationships:
+
+A payment belongs to a booking.
+
+✍️ Reviews
+Represents feedback left by users after a stay.
+
+id (Primary Key)
+
+property_id (Foreign Key → Properties)
+
+user_id (Foreign Key → Users)
+
+rating (1–5)
+
+comment
+
+🧩 Relationships:
+
+A review belongs to a property.
+
+A review is written by a user.
+
